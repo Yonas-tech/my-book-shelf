@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ShelfItem({ bookItem, completeRead, removeBook }) {
+function ShopItem({ bookItem, ownIt, removeBook }) {
     return (
         <div>
             <li>
@@ -10,12 +10,12 @@ function ShelfItem({ bookItem, completeRead, removeBook }) {
                 </div>
 
                 <label className="middle">
-                    Complete
+                    Owned
                     <input
                         type="checkbox"
                         checked={bookItem.completed}
                         onChange={(e) => {
-                            completeRead(bookItem.id, e)
+                            ownIt(bookItem.id, e)
                         }}
                     />
                 </label>
@@ -32,5 +32,5 @@ function ShelfItem({ bookItem, completeRead, removeBook }) {
     )
 }
 
-export default ShelfItem
+export default ShopItem
 

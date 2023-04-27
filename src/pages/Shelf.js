@@ -38,7 +38,7 @@ function Shelf({ shelfBooks, completeRead, removeBook }) {
                 </ul>
             </div>
         ) : (
-            <h1>No Todos Added Yet</h1>
+            <h1>No Books Added Yet</h1>
         )
 
 

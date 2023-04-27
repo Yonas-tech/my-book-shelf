@@ -1,7 +1,7 @@
 import React from 'react'
 import no_cover_thumb from './images/no_cover_thumb.gif' 
 
-function BookInfoCard({ book, addToShelf }) {
+function BookInfoCard({ book, addToShelf, addToBuyList }) {
     let url = '';
     function getThumbnail(){
         if(book.volumeInfo.imageLinks !== undefined){
@@ -62,9 +62,9 @@ function BookInfoCard({ book, addToShelf }) {
                     <tr>
                         <td className="buttons" colSpan={2}>
                             <div>
-                                <button onClick={addToShelf(book)}>Add to Shelf</button>
-                                <button>Add to Buy List</button>
-                                <button>?????</button>
+                                <button onClick={()=>{addToShelf(book)}}>Add to Shelf</button>
+                                <button onClick={()=>{addToBuyList(book)}}>Add to Buy List</button>
+                                {/* <button>?????</button> */}
                             </div>
                         </td>
                     </tr>

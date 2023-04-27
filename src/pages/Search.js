@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import BookInfoCard from '../components/BookInfoCard';
 
-function Search({addToShelf}) {
+function Search({addToShelf, addToBuyList}) {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [currentSearchTerm, setCurrentSearchTerm] = useState('');
     const [books, setBooks] = useState([]);
     const [result, setResult] = useState(<div></div>);
 
-
     //Function to getBooks
+    // ?????? ERROR: expression exptected.
     const getBooks = async (e) => {
         e.preventDefault();
         let term = e.target[0].value;
@@ -46,7 +46,10 @@ function Search({addToShelf}) {
                     <h4>Search result for {`"${currentSearchTerm}"`}</h4>
                     <div className='result'>
                         {books.map((book, idx) => {
-                            return (<BookInfoCard book={book} key={idx} addToShelf={addToShelf}/>)
+                            return (<BookInfoCard book={book} 
+                                                    key={idx} 
+                                                    addToShelf={addToShelf}
+                                                    addToBuyList={addToBuyList}/>)
                         })}
                     </div>
                 </>
@@ -61,13 +64,16 @@ function Search({addToShelf}) {
     }, [books])
 
 
+
+
+
     return (
         <div className="search-container">
             <div className='search-page'>
                 <div className="form-container" >
                     <form id="myform" onSubmit={getBooks}>
                         <div className="input-field">
-                            <label for="search">Search Books</label>
+                            <label htmlFor="search">Search Books</label>
                             <input type="search" id="books" onChange={(e) => { setSearchTerm(e.target.value) }} required />
                         </div>
                         <button type="submit" className="btn red">Search Books</button>
