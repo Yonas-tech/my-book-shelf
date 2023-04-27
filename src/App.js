@@ -39,8 +39,6 @@ function App() {
   useEffect(()=>{
     console.log("shelf: ")
     console.log(shelfBooks.length)
-    console.log("shop list: ")
-    console.log(shoppingList.length)
   },[shelfBooks])
 
   // Function to mark a book reading complete
@@ -64,7 +62,7 @@ function App() {
     setShelf([...shelfBooksCopy])
   }
 
-  //////// Functions for Shopping List //// 
+  //////// Functions for Shopping List ////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ 
   useEffect(() => {
     const savedShopping = localStorage.getItem("bookShoppingList")
     if (savedShopping && savedShopping !== "undefined" && savedShopping !== "null") {
@@ -97,7 +95,7 @@ function App() {
     const indexOfBookItem = shoppingListCopy.findIndex((i) => i.id === id)
     shoppingListCopy[indexOfBookItem].owned = !shoppingListCopy[indexOfBookItem].owned
     localStorage.setItem("bookShoppingList", JSON.stringify([...shoppingListCopy]))
-    setShelf([...shoppingListCopy])
+    setShoppingList([...shoppingListCopy])
   }
 
   // Function to remove a book from the shopping list
@@ -109,7 +107,7 @@ function App() {
       "bookShoppingList",
       JSON.stringify([...shoppingListCopy])
     )
-    setShelf([...shoppingListCopy])
+    setShoppingList([...shoppingListCopy])
   }
 
 

@@ -20,7 +20,6 @@ function ShelfItem({ bookItem, completeRead, removeBook }) {
                     />
                 </label>
                 <button
-                    // checked={bookItem.completed}
                     onClick={(e) => {
                         removeBook(bookItem.id)
                     }}

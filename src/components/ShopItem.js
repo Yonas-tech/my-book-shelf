@@ -13,14 +13,13 @@ function ShopItem({ bookItem, ownIt, removeBook }) {
                     Owned
                     <input
                         type="checkbox"
-                        checked={bookItem.completed}
+                        checked={bookItem.owned}
                         onChange={(e) => {
                             ownIt(bookItem.id, e)
                         }}
                     />
                 </label>
                 <button
-                    // checked={bookItem.completed}
                     onClick={(e) => {
                         removeBook(bookItem.id)
                     }}
