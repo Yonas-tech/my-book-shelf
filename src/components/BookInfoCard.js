@@ -1,7 +1,7 @@
 import React from 'react'
 import no_cover_thumb from './images/no_cover_thumb.gif' 
 
-function BookInfoCard({ book, addToShelf, addToBuyList }) {
+function BookInfoCard({ book, addToShelf, addToWishList }) {
     let url = '';
     function getThumbnail(){
         if(book.volumeInfo.imageLinks !== undefined){
@@ -12,32 +12,19 @@ function BookInfoCard({ book, addToShelf, addToBuyList }) {
         }
     }
 
-
     // function concatISBN(ISBNs) {
     //     return (ISBNs[0].identifier + ", " + ISBNs[1].identifier)
     // }
 
     return (
-        // <div className='book-card'>
-        //     <h5> {book.volumeInfo.title}</h5>
-        //     <h5> {'By: ' + book.volumeInfo.authors}</h5>
-        // <div className='book-img'>
-        //     <img src={url}  alt={book.volumeInfo.title} /> <br />
-        //     <a href={book.volumeInfo.infoLink} target='_parent'>
-        //         <button className="imagebutton"  >Read More</button></a>
-        // </div>
-        //     <br />
-        // </div>
 
         <div className="book-card">
             <div className="book-img">
-                <img src={getThumbnail()} alt={book.volumeInfo.title} /> <br />
-                <a href={book.volumeInfo.infoLink} target='_blank'>
-                    <button className="imagebutton"  >Read More</button></a>
+                <img src={getThumbnail()} alt={book.volumeInfo.title} /> <br/>
             </div>
-            <table>
-                <tbody>
-                    <tr>
+            <table className='book-card-table'>
+                <tbody className='book-card-table-body'>
+                    <tr> 
                         {/* <td rowSpan={7}>
                         </td> */}
                         <td>Title: </td>
@@ -62,8 +49,11 @@ function BookInfoCard({ book, addToShelf, addToBuyList }) {
                     <tr>
                         <td className="buttons" colSpan={2}>
                             <div>
+                                <a href={book.volumeInfo.infoLink} target='_blank'>
+                                    <button className="imagebutton"  >Read More {"\u2197 "}</button>
+                                </a>
                                 <button onClick={()=>{addToShelf(book)}}>Add to Shelf</button>
-                                <button onClick={()=>{addToBuyList(book)}}>Add to Buy List</button>
+                                <button onClick={()=>{addToWishList(book)}}>Add to Wish List</button>
                                 {/* <button>?????</button> */}
                             </div>
                         </td>

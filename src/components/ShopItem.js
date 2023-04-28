@@ -1,33 +1,39 @@
 import React from 'react'
 
-function ShopItem({ bookItem, ownIt, removeBook }) {
+function ShopItem({ bookItem, ownIt, removeBook, addToShelf }) {
     return (
-        <div>
-            <li>
-                <div className="left">
-                    {/* {console.log(bookItem)} */}
-                    {bookItem.book.volumeInfo.title}
-                </div>
+        <tr>
+            <td className="left">
+                {bookItem.book.volumeInfo.title}
+            </td>
+            <td>
+                {JSON.stringify(bookItem.book.volumeInfo.authors)}
+            </td>
+            <td>
+                {bookItem.book.volumeInfo.publisher}
+            </td>
 
+            <td>
                 <label className="middle">
-                    Owned
+                    {/* Owned */}
                     <input
                         type="checkbox"
                         checked={bookItem.owned}
                         onChange={(e) => {
                             ownIt(bookItem.id, e)
+                            // addToShelf(bookItem.book)
                         }}
                     />
                 </label>
-                <button
-                    onClick={(e) => {
-                        removeBook(bookItem.id)
-                    }}
-                >
+            </td>
+
+            <td>
+                <button onClick={(e) => { removeBook(bookItem.id) }} >
                     Remove Book
                 </button>
-            </li>
-        </div>
+            </td>
+
+        </tr>
     )
 }
 

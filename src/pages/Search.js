@@ -1,20 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import BookInfoCard from '../components/BookInfoCard';
 
-function Search({addToShelf, addToBuyList}) {
+function Search({ addToShelf, addToWishList }) {
 
     const [searchTerm, setSearchTerm] = useState('');
-    const [currentSearchTerm, setCurrentSearchTerm] = useState('');
     const [books, setBooks] = useState([]);
     const [result, setResult] = useState(<div></div>);
+    // to displaying books if on local storage
+    let booksPresent = useRef(false); 
+    let currentSearchTerm = useRef('');
+    
 
-    //Function to getBooks
-    // ?????? ERROR: expression exptected.
+    // restore fetched books displaying last result when returning to search page
+    useEffect(() => {
+        console.log("here 1")
+        const fetchedBooks = localStorage.getItem("fetchedBooks")
+        currentSearchTerm.current = localStorage.getItem('searchTerm')
+        if (fetchedBooks && fetchedBooks !== "undefined" && fetchedBooks !== "null") {
+            setBooks(JSON.parse(fetchedBooks))
+        }
+    }, [])
+
+    //Function to fetch Books
     const getBooks = async (e) => {
         e.preventDefault();
         let term = e.target[0].value;
-        setCurrentSearchTerm(term);
-        console.log(e)
+        // setCurrentSearchTerm(term);
+        currentSearchTerm.current = term;
+        // console.log(e)
         if (searchTerm === '') {
             alert("Book title is required");
         }
@@ -34,22 +47,22 @@ function Search({addToShelf, addToBuyList}) {
             }
             e.target[0].value = '';
         }
+        booksPresent.current = true;
     };
 
     // Function to make display of results
     const displayResult = function () {
-        console.log(books)
-        //check if the books array is not empty 
+        // if the books array is not empty, then return book-info card for each books fetched
         if (books.length > 0) {
             return (
                 <>
-                    <h4>Search result for {`"${currentSearchTerm}"`}</h4>
+                    <h4>Search result for {`"${currentSearchTerm.current}"`}</h4>
                     <div className='result'>
                         {books.map((book, idx) => {
-                            return (<BookInfoCard book={book} 
-                                                    key={idx} 
-                                                    addToShelf={addToShelf}
-                                                    addToBuyList={addToBuyList}/>)
+                            return (<BookInfoCard book={book}
+                                key={idx}
+                                addToShelf={addToShelf}
+                                addToWishList={addToWishList} />)
                         })}
                     </div>
                 </>
@@ -59,12 +72,20 @@ function Search({addToShelf, addToBuyList}) {
             return (<div></div>);
         }
     }
+
     useEffect(() => {
-        setResult(displayResult());
+        if (booksPresent.current && books!==[]) {
+            // save new fetched books and search term to local storage
+            localStorage.setItem("fetchedBooks",
+                JSON.stringify([...books]))
+            localStorage.setItem('searchTerm',
+                currentSearchTerm.current)
+
+            // display result to the search page
+            setResult(displayResult());
+        }
+        booksPresent.current = true; // to make sure this useEffect runs when there are books loaded
     }, [books])
-
-
-
 
 
     return (
@@ -86,7 +107,7 @@ function Search({addToShelf, addToBuyList}) {
 
 
             </div>
-            
+
             <div className="overlay book-overview">
 
             </div>

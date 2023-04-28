@@ -11,9 +11,11 @@ function App() {
   const [shelfBooks, setShelf] = useState([]);
   // shoppingList includes the books to shop and those already owned
   const [shoppingList, setShoppingList] =useState([]); 
+  //for search result
+  const [result, setResult] = useState(<div></div>);
 
 
-  //////// Functions for Bookshelf  ////
+  //////// Functions for Bookshelf  ////////////////////////////////
   useEffect(() => {
     const savedShelfBooks = localStorage.getItem("shelf")
     if (savedShelfBooks && savedShelfBooks !== "undefined" && savedShelfBooks !== "null") {
@@ -21,6 +23,7 @@ function App() {
     }
   }, [])
 
+  // Function to add book to shelf
   const addToShelf = (book) => {
     console.log('hi')
     //?? check if the book is already in the shelf here
@@ -30,16 +33,11 @@ function App() {
       return
     }}
     // BookItem = { 'book': book, id: Date.now(), completed: false }
-    const newBookItem = { 'book': book, id: Date.now(), completed: false }
+    const newBookItem = { 'book': book, completed: false } // id: Date.now(), 
     localStorage.setItem("shelf", JSON.stringify([newBookItem, ...shelfBooks]))
     setShelf([newBookItem, ...shelfBooks])
     console.log(shelfBooks)
   }
-
-  useEffect(()=>{
-    console.log("shelf: ")
-    console.log(shelfBooks.length)
-  },[shelfBooks])
 
   // Function to mark a book reading complete
   const completeRead = (id, e) => {
@@ -70,7 +68,8 @@ function App() {
     }
   }, [])
 
-  const addToBuyList = (book) => {
+  // function to add book to wish list 
+  const addToWishList = (book) => {
     // check if the book is already in the shopping list
     for (let i=0;i<shoppingList.length; i++){
     if(book.id===shoppingList[i].book.id){  // ????????? also let user know if owned already
@@ -78,16 +77,11 @@ function App() {
       return
     }}
     // BookItem = { 'book': book, id: Date.now(), owned: false }
-    const newBookItem = { 'book': book, id: Date.now(), owned: false }
+    const newBookItem = { 'book': book, owned: false } //, id: Date.now()
     localStorage.setItem("bookShoppingList", JSON.stringify([newBookItem, ...shoppingList]))
     setShoppingList([newBookItem, ...shoppingList])
     console.log(shoppingList)
   }
-
-  useEffect(()=>{
-    console.log("Shoping List: ")
-    console.log(shoppingList.length)
-  },[shoppingList])
 
   // Function to mark a book owned
   const ownIt = (id, e) => {
@@ -115,7 +109,8 @@ function App() {
     <div className="App">
       <Nav/>
       <Routes>
-        <Route path="/" element={<Search addToShelf={addToShelf} addToBuyList={addToBuyList}/>}/>
+        <Route path="/" element={<Search addToShelf={addToShelf} 
+                                         addToWishList={addToWishList}/>}/>
         <Route path="/book-shelf" element={<Shelf 
                                                   shelfBooks={shelfBooks} 
                                                   completeRead={completeRead}
@@ -123,8 +118,9 @@ function App() {
         <Route path="shopping-list" element={<ShoppingList
                                                   shoppingList={shoppingList}
                                                   ownIt={ownIt}
-                                                  removeBook={removeFromShoppingList}/>} />
-        <Route path="/book-shelf/:bookID" element={<BookDetail/>}/>
+                                                  removeBook={removeFromShoppingList}
+                                                  addToShelf={addToShelf}/>} />
+        <Route path="/book-shelf/:bookId" element={<BookDetail/>}/>
       </Routes>
       
     </div>
