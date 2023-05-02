@@ -7,7 +7,7 @@ function Shelf({ shelfBooks, completeRead, removeBook }) {
         shelfBooks.length ? (
             <div className='shelf'>
                 <h1>Books To Read</h1>
-                <table>
+                <table className='bookslist'>
                     <tr>
                         <th>Title</th>
                         <th>Authors</th>
@@ -33,7 +33,7 @@ function Shelf({ shelfBooks, completeRead, removeBook }) {
 
                 <h1>Completed Books </h1>
 
-                <table>
+                <table className='bookslist'>
                     <tr>
                         <th>Title</th>
                         <th>Authors</th>

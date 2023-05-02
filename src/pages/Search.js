@@ -94,8 +94,11 @@ function Search({ addToShelf, addToWishList }) {
                 <div className="form-container" >
                     <form id="myform" onSubmit={getBooks}>
                         <div className="input-field">
-                            <label htmlFor="search">Search Books</label>
-                            <input type="search" id="books" onChange={(e) => { setSearchTerm(e.target.value) }} required />
+                            {/* <label htmlFor="search">Search Books</label> */}
+                            <input type="search" id="books" 
+                                    onChange={(e) => { setSearchTerm(e.target.value) }}
+                                    placeholder='title, author, ISBN, or keywords' 
+                                    required />
                         </div>
                         <button type="submit" className="btn red">Search Books</button>
                     </form>

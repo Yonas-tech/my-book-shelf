@@ -111,3 +111,26 @@ th,td {
 table.bookslist, th{
     line-height: 1.2em;
   }
+
+
+
+
+
+
+/* //////////////////////////////  My Bookshelf  ///////////////////////////// */
+
+table.bookslist{
+    background-color: #96D4D4;
+    border: 2px solid white;
+    border-collapse: collapse;
+    text-align: left;
+  }
+th,td {
+    /* background-color: #96D4D4; */
+    border: 2px solid white;
+    border-collapse: collapse;
+  }
+
+table.bookslist, th{
+    line-height: 1.2em;
+  }

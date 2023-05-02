@@ -5,6 +5,7 @@ import BookDetail from "./pages/BookDetail";
 import Nav from "./components/Nav";
 import {Route, Routes} from 'react-router-dom';
 import { useEffect, useState } from "react";
+import './style.css';
 
 function App() {
 
@@ -103,7 +104,6 @@ function App() {
     )
     setShoppingList([...shoppingListCopy])
   }
-
 
   return (
     <div className="App">
