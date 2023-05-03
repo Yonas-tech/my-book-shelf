@@ -7,9 +7,8 @@ function Search({ addToShelf, addToWishList }) {
     const [books, setBooks] = useState([]);
     const [result, setResult] = useState(<div></div>);
     // to displaying books if on local storage
-    let booksPresent = useRef(false); 
+    let booksPresent = useRef(false);
     let currentSearchTerm = useRef('');
-    
 
     // restore fetched books displaying last result when returning to search page
     useEffect(() => {
@@ -62,7 +61,8 @@ function Search({ addToShelf, addToWishList }) {
                             return (<BookInfoCard book={book}
                                 key={idx}
                                 addToShelf={addToShelf}
-                                addToWishList={addToWishList} />)
+                                addToWishList={addToWishList} />
+                            )
                         })}
                     </div>
                 </>
@@ -74,31 +74,30 @@ function Search({ addToShelf, addToWishList }) {
     }
 
     useEffect(() => {
-        if (booksPresent.current && books!==[]) {
+        if (booksPresent.current && books !== []) {
             // save new fetched books and search term to local storage
             localStorage.setItem("fetchedBooks",
                 JSON.stringify([...books]))
             localStorage.setItem('searchTerm',
                 currentSearchTerm.current)
-
             // display result to the search page
             setResult(displayResult());
         }
         booksPresent.current = true; // to make sure this useEffect runs when there are books loaded
     }, [books])
 
-
     return (
-        <div className="search-container">
+
+        <div className="main">
             <div className='search-page'>
                 <div className="form-container" >
                     <form id="myform" onSubmit={getBooks}>
                         <div className="input-field">
-                            {/* <label htmlFor="search">Search Books</label> */}
-                            <input type="search" id="books" 
-                                    onChange={(e) => { setSearchTerm(e.target.value) }}
-                                    placeholder='title, author, ISBN, or keywords' 
-                                    required />
+                            <input className='search-bar'
+                                type="search" id="books"
+                                onChange={(e) => { setSearchTerm(e.target.value) }}
+                                placeholder='title, author, ISBN, or keywords'
+                                required />
                         </div>
                         <button type="submit" className="btn red">Search Books</button>
                     </form>
@@ -107,12 +106,6 @@ function Search({ addToShelf, addToWishList }) {
                 <div className='result-container'>
                     {result}
                 </div>
-
-
-            </div>
-
-            <div className="overlay book-overview">
-
             </div>
         </div>
 

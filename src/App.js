@@ -82,7 +82,7 @@ function App() {
     localStorage.setItem("bookShoppingList", JSON.stringify([newBookItem, ...shoppingList]))
     setShoppingList([newBookItem, ...shoppingList])
     console.log(shoppingList)
-  }
+  } 
 
   // Function to mark a book owned
   const ownIt = (id, e) => {
@@ -111,16 +111,16 @@ function App() {
       <Routes>
         <Route path="/" element={<Search addToShelf={addToShelf} 
                                          addToWishList={addToWishList}/>}/>
-        <Route path="/book-shelf" element={<Shelf 
+        <Route path="/book-shelf" element={<Shelf className="body"
                                                   shelfBooks={shelfBooks} 
                                                   completeRead={completeRead}
                                                   removeBook ={removeShelfBook}/>}/>
-        <Route path="shopping-list" element={<ShoppingList
+        <Route path="shopping-list" element={<ShoppingList className="body"
                                                   shoppingList={shoppingList}
                                                   ownIt={ownIt}
                                                   removeBook={removeFromShoppingList}
                                                   addToShelf={addToShelf}/>} />
-        <Route path="/book-shelf/:bookId" element={<BookDetail/>}/>
+        <Route path="/book-shelf/:bookId" element={<BookDetail className="body"/>}/>
       </Routes>
       
     </div>

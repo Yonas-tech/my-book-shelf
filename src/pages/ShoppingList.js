@@ -3,70 +3,75 @@ import ShopItem from '../components/ShopItem'
 
 function ShoppingList({ shoppingList, ownIt, removeBook, addToShelf }) {
   return (
-    shoppingList.length ? (
-      <div className='shopping-list'>
+    shoppingList.length ?
+      <div className="main">
+        <div className='shopping-list'>
 
-        <h1>Wish List</h1>
+          <h1>Wish List</h1>
 
-        <table className="bookslist">
-          <tr>
-            <th>Title</th>
-            <th>Authors</th>
-            <th>Publisher</th>
-            {/* <th>Identifier</th> */}
-            <th>Owned?</th>
-            <th style={{background:"white"}}></th>
-          </tr>
-          <tbody>
-            {shoppingList
-              .filter((i) => !i.owned)
-              .map((bookItem, index) => {
-                return (
-                  <ShopItem
-                    key={index}
-                    bookItem={bookItem}
-                    ownIt={ownIt}
-                    removeBook={removeBook}
-                    addToShelf={addToShelf}
-                  />
-                )
-              })}
-          </tbody>
-        </table>
+          <table className="bookslist wish-list">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Authors</th>
+                <th>Publisher</th>
+                {/* <th>Identifier</th> */}
+                <th>Owned?</th>
+                <th style={{ background: "none" }}></th>
+              </tr>
+            </thead>
 
-        <h1>Owned Books </h1>
+            <tbody>
+              {shoppingList
+                .filter((i) => !i.owned)
+                .map((bookItem, index) => {
+                  return (
+                    <ShopItem
+                      key={index}
+                      bookItem={bookItem}
+                      ownIt={ownIt}
+                      removeBook={removeBook}
+                      addToShelf={addToShelf} />
+                  )
+                })}
+            </tbody>
+          </table>
 
-        <table className="bookslist">
-        <tr>
-            <th>Title</th>
-            <th>Authors</th>
-            <th>Publisher</th>
-            {/* <th>Identifier</th> */}
-            <th>Owned?</th>
-            <th style={{background:"white"}}></th>
-          </tr>
-          <tbody>
-            {shoppingList
-              .filter((i) => i.owned)
-              .map((bookItem) => {
-                return (
-                  <ShopItem
-                    key={bookItem.id}
-                    bookItem={bookItem}
-                    ownIt={ownIt}
-                    removeBook={removeBook}
-                  />
-                )
-              })}
-          </tbody>
+          <h1>Owned Books </h1>
 
-        </table>
+          <table className="bookslist owned">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Authors</th>
+                <th>Publisher</th>
+                {/* <th>Identifier</th> */}
+                <th>Owned?</th>
+                <th style={{ background: "none" }}></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {shoppingList
+                .filter((i) => i.owned)
+                .map((bookItem, index) => {
+                  return (
+                    <ShopItem
+                      key={index}
+                      bookItem={bookItem}
+                      ownIt={ownIt}
+                      removeBook={removeBook}
+                    />
+                  )
+                })}
+            </tbody>
+          </table>
+        </div>
       </div>
-    ) : (
-      <h1>No Books Added Yet</h1>
-    )
-
-
+      :
+      <div className="main">
+        <h1>No Books Added Yet</h1>
+      </div>
   )
 }
 

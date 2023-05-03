@@ -1,10 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import BookViewer from './test';
-
-function BookDetail(props) {
-
+function BookDetail() {
   // useParams
   const params = useParams();
   const bookId = params.bookId;
@@ -13,7 +10,7 @@ function BookDetail(props) {
   // on shelfRef change, book gets a book object from the sheflRef with the book having id == params.bookId
   const [book, setBook] = useState(null)
 
-  useEffect(() => { // for bookRef
+  useEffect(() => { // for getting the book from the shelf
     if (shelfRef.current != []) {
       console.log(shelfRef.current)
       for (let i = 0; i < shelfRef.current.length; i++) {
@@ -25,9 +22,7 @@ function BookDetail(props) {
           console.log("book:");
           console.log(shelfRef.current[i].book)
           // load it onto the bookRef
-          // bookRef.current = shelfRef.current[i].book;
           setBook(shelfRef.current[i].book);
-          // console.log(shelfRef.current[i].book);
           return
         }
       }
@@ -36,21 +31,18 @@ function BookDetail(props) {
 
   useEffect(() => { // for loading shelfRef from loacalStorage
     shelfRef.current = JSON.parse(localStorage.getItem("shelf"))
-    // console.log(shelfRef.current)
   }, [])
 
-
-  // console log bookRef value, when bookRef value changes
+  // console log book value, when book value changes
   useEffect(() => {
     console.log("Got the book: ")
     console.log(book)
   }, [book])
 
   return (
-
     <div className='book-detail'>
-      {book ?
-        <div>
+      {book ? 
+        <div className='main'>
           <h1 className="book-title">{book.volumeInfo.title}</h1>
           <h3>By: {book.volumeInfo.authors}</h3>
 
